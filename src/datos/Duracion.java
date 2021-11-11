@@ -1,12 +1,20 @@
 package datos;
 
-public class Duracion {
+public class Duracion implements Cloneable {
 	
 	private int inicioCPU;
 	private int EyS;
 	private int finCPU;
 	private int tiempoTotal;
 	private int tiempoEspera;
+	
+	public Duracion() {
+		this.inicioCPU = 0;
+		this.EyS = 0;
+		this.finCPU = 0;
+		this.tiempoTotal = 0;
+		this.tiempoEspera = 0;
+	}
 	
 	public Duracion(int inicioCPU, int eyS, int finCPU) {
 		
@@ -63,4 +71,14 @@ public class Duracion {
 		return "Duracion [inicioCPU=" + inicioCPU + ", EyS=" + EyS + ", finCPU=" + finCPU + ", tiempoTotal="
 				+ tiempoTotal + ", tiempoEspera=" + tiempoEspera + "]";
 	}	
+	
+	public Object clone() { // ENE-2019¡¡¡
+		Duracion obj = null;
+		try {
+			obj = (Duracion)super.clone();
+		} catch (Exception e) {
+			System.out.println(" no se puede duplicar objeto");
+		}
+		return obj;
+	}
 }

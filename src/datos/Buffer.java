@@ -3,6 +3,7 @@ package datos;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Buffer {
 	
 	//FALTAN METODOS
@@ -82,4 +83,36 @@ public class Buffer {
 		return objeto;
 	}
 	
+	public boolean ordenarId() {
+
+		int lenD = getListaProcesos().size();
+		Proceso procesoAux = new Proceso();int k;
+		boolean ordenado=false;
+
+		// Ordeno lista por InsertionSort por id
+		for(int i=1;i<lenD;i++){
+			procesoAux=getListaProcesos().get(i);
+			k=i-1;
+			ordenado=false;
+			while(!ordenado && k>=0){
+				if(procesoAux.getIdProceso()<getListaProcesos().get(k).getIdProceso()){	
+					getListaProcesos().set(k+1, getListaProcesos().get(k));
+					k=k-1;
+				}else{
+					ordenado=true;
+				}
+			}
+			getListaProcesos().set(k+1, procesoAux);
+		}
+		return ordenado;
+	}
+	
+	// Interrucpción de E/S
+	public boolean interrupcionEyS(int index){
+		boolean endEyS=true;
+		if (getListaProcesos().get(index).getDuracion().getEyS() > 0) {
+			endEyS=false;
+		}
+		return endEyS;
+	}
 }

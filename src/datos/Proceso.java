@@ -1,6 +1,6 @@
 package datos;
 
-public class Proceso {
+public class Proceso implements Cloneable, Comparable<Proceso>{
 	
 	//FALTAN METODOS
 	
@@ -9,6 +9,15 @@ public class Proceso {
 	private int comienzaTiempo;
 	private Prioridad prioridad;
 	private Duracion duracion;
+	
+	public Proceso() {
+		
+		this.idProceso = 0;
+		this.proceso = " ";
+		this.comienzaTiempo = 0;
+		this.prioridad = Prioridad.Baja;
+		this.duracion = new Duracion();
+	}
 	
 	public Proceso(int idProceso, String proceso, int comienzaTiempo, Prioridad prioridad, Duracion duracion) {
 		
@@ -84,4 +93,45 @@ public class Proceso {
 		
 		return prioridad;
 	}
+
+	public Proceso clone()
+	{
+		Proceso obj = null;
+		try 
+		{
+			obj = (Proceso)super.clone();			
+		} 
+		
+		catch (Exception e)
+		{
+			System.out.println(" no se puede duplicar objeto");
+		}
+		
+		obj.duracion = (Duracion)obj.duracion.clone();
+		
+		return obj;
+	}
+	
+	public int compareTo(Proceso producto)
+	{
+		int resultado = 0;
+		
+		if (this.getDuracion().getTiempoTotal()  < producto.getDuracion().getTiempoTotal())
+		{
+			resultado = -1;
+		} 
+		
+		else if (this.getDuracion().getTiempoTotal() > producto.getDuracion().getTiempoTotal())
+		{
+			resultado = 1;
+		} 
+		
+		else
+		{
+			resultado = 0;
+		}
+		
+		return resultado;
+	}
+	
 }

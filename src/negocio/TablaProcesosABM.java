@@ -7,16 +7,14 @@ import datos.Tabla;
 
 public class TablaProcesosABM {
 	
-	//FALTAN PROCESOS
-	
 	private List<Proceso> listaProcesos;
 	private int cantidaColumnas;
 		
-	public TablaProcesosABM(TablaProcesosABM tABM) {
+	public TablaProcesosABM(ProcesamientoABM admP1) {
 		
 		super();
-		this.listaProcesos = tABM.getListaProcesos();
-		this.cantidaColumnas = tABM.getCantidaColumnas();
+		this.listaProcesos = admP1.getListaProcesos();
+		this.cantidaColumnas = admP1.getCantidaColumnas();
 	}
 
 	public List<Proceso> getListaProcesos() {
@@ -55,7 +53,7 @@ public class TablaProcesosABM {
 		for (int i = 0; i < listaProcesos.size(); i++) {
 			string += "\n| " + traerProceso(i + 1).getProceso() + "\t  |";
 			string += " " + tiempoLLegada(i + 1) + "\t\t   |";
-			string += " " + tiempototal(i + 1) + "\t\t  |";
+			string += " " + tiempoTotal(i + 1) + "\t\t  |";
 			string += " " + tiempoFinalizacion(i + 1, tabla) + "\t\t\t|";
 			// Promedios
 			T += tiempoRespuesta(i + 1, tabla);
@@ -96,7 +94,7 @@ public class TablaProcesosABM {
 		return traerProceso(idProceso).getComienzaTiempo();
 	}
 
-	public int tiempototal(int idProceso)
+	public int tiempoTotal(int idProceso)
 	{		
 		return traerProceso(idProceso).tiempoTotal();
 	}
@@ -123,12 +121,12 @@ public class TablaProcesosABM {
 
 	public int tiempoDesperdiciado(int idProceso, Tabla[][] tabla)
 	{
-		return tiempoRespuesta(idProceso, tabla) - tiempototal(idProceso);
+		return tiempoRespuesta(idProceso, tabla) - tiempoTotal(idProceso);
 	}
 
 	public float tiempoPenalización(int idProceso, Tabla[][] tabla)
 	{
-		return (float) tiempoRespuesta(idProceso, tabla) / tiempototal(idProceso);
+		return (float) tiempoRespuesta(idProceso, tabla) / tiempoTotal(idProceso);
 	}
 
 	public float promedio(float cantidad)
