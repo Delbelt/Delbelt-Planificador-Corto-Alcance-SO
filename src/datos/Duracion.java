@@ -72,13 +72,19 @@ public class Duracion implements Cloneable {
 				+ tiempoTotal + ", tiempoEspera=" + tiempoEspera + "]";
 	}	
 	
-	public Object clone() { // ENE-2019¡¡¡
-		Duracion obj = null;
-		try {
-			obj = (Duracion)super.clone();
-		} catch (Exception e) {
+	public Object clone()
+	{ 
+		Duracion objeto = null;
+		try 
+		{
+			objeto = (Duracion)super.clone();
+		}
+		
+		catch (Exception e) 
+		{
 			System.out.println(" no se puede duplicar objeto");
 		}
-		return obj;
+		
+		return objeto;
 	}
 }

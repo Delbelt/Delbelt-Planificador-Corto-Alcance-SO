@@ -21,6 +21,6 @@ public class TestRoundRobin {
 		
 		System.out.println("----------- Resultados Round Robin -----------");
 		TablaProcesosABM tABM = new TablaProcesosABM(pABM);
-		System.out.println(tABM.mostrarResultados(pABM.planificarPrioridad()));
+		System.out.println(tABM.mostrarResultados(pABM.planificarRoundRobin(2)));
 	}
 }

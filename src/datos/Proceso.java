@@ -1,9 +1,7 @@
 package datos;
 
-public class Proceso implements Cloneable, Comparable<Proceso>{
-	
-	//FALTAN METODOS
-	
+public class Proceso implements Cloneable, Comparable<Proceso> {
+		
 	private int idProceso;
 	private String proceso;
 	private int comienzaTiempo;
@@ -75,6 +73,7 @@ public class Proceso implements Cloneable, Comparable<Proceso>{
 				+ ", prioridad=" + prioridad + ", duracion=" + duracion + "]";
 	}
 	
+//////////////////////////////////////////////////////////// METODOS		
 	public int tiempoTotal()
 	{		
 		return getDuracion().getInicioCPU() + getDuracion().getFinCPU() + getDuracion().getEyS();
@@ -86,20 +85,16 @@ public class Proceso implements Cloneable, Comparable<Proceso>{
 	}
 	
 	public int tasaRespuesta()
-	{
-		int prioridad=0;
-		
-		prioridad=(getDuracion().getTiempoEspera() + getDuracion().getTiempoTotal()) / getDuracion().getTiempoTotal();
-		
-		return prioridad;
+	{		
+		return (duracion.getTiempoEspera() + getDuracion().getTiempoTotal()) / getDuracion().getTiempoTotal();
 	}
 
 	public Proceso clone()
 	{
-		Proceso obj = null;
+		Proceso objeto = null;
 		try 
 		{
-			obj = (Proceso)super.clone();			
+			objeto = (Proceso)super.clone();			
 		} 
 		
 		catch (Exception e)
@@ -107,9 +102,9 @@ public class Proceso implements Cloneable, Comparable<Proceso>{
 			System.out.println(" no se puede duplicar objeto");
 		}
 		
-		obj.duracion = (Duracion)obj.duracion.clone();
+		objeto.duracion = (Duracion)objeto.duracion.clone();
 		
-		return obj;
+		return objeto;
 	}
 	
 	public int compareTo(Proceso producto)

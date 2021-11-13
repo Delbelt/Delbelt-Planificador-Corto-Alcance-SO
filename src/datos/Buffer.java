@@ -3,11 +3,8 @@ package datos;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Buffer {
-	
-	//FALTAN METODOS
-	
+
 	private int idBuffer;
 	private List<Proceso> listaProcesos = new ArrayList<Proceso>();
 	
@@ -36,6 +33,8 @@ public class Buffer {
 	public String toString() {
 		return "Buffer [idBuffer=" + idBuffer + ", listaProcesos=" + listaProcesos + "]";
 	}
+	
+//////////////////////////////////////////////////////////// METODOS
 	
 	public boolean bloquearProceso(Proceso proceso)
 	{
@@ -83,36 +82,47 @@ public class Buffer {
 		return objeto;
 	}
 	
-	public boolean ordenarId() {
-
-		int lenD = getListaProcesos().size();
-		Proceso procesoAux = new Proceso();int k;
+	public boolean ordenarId()
+	{
+		Proceso objeto = new Proceso();
+		int indice;
 		boolean ordenado=false;
 
 		// Ordeno lista por InsertionSort por id
-		for(int i=1;i<lenD;i++){
-			procesoAux=getListaProcesos().get(i);
-			k=i-1;
+		for(int i = 1; i < listaProcesos.size(); i++)
+		{
+			objeto=listaProcesos.get(i);
+			indice=i-1;
 			ordenado=false;
-			while(!ordenado && k>=0){
-				if(procesoAux.getIdProceso()<getListaProcesos().get(k).getIdProceso()){	
-					getListaProcesos().set(k+1, getListaProcesos().get(k));
-					k=k-1;
-				}else{
+			
+			while(!ordenado && indice>=0)
+			{
+				if(objeto.getIdProceso()<getListaProcesos().get(indice).getIdProceso())
+				{	
+					getListaProcesos().set(indice+1, getListaProcesos().get(indice));
+					indice=indice-1;
+				}
+				else
+				{
 					ordenado=true;
 				}
 			}
-			getListaProcesos().set(k+1, procesoAux);
+				getListaProcesos().set(indice+1, objeto);
 		}
+		
 		return ordenado;
 	}
 	
 	// Interrucpción de E/S
-	public boolean interrupcionEyS(int index){
-		boolean endEyS=true;
-		if (getListaProcesos().get(index).getDuracion().getEyS() > 0) {
-			endEyS=false;
+	public boolean interrupcionEyS(int indice)
+	{
+		boolean endEntradaSalida=true;
+		
+		if (listaProcesos.get(indice).getDuracion().getEyS() > 0)
+		{
+			endEntradaSalida=false;
 		}
-		return endEyS;
+		
+		return endEntradaSalida;
 	}
 }

@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Listo {
-	
-	//FALTAN METODOS
-	
+		
 	private int idListo;
 	private List<Proceso> listaProcesos = new ArrayList<Proceso>();
 	
@@ -34,7 +32,8 @@ public class Listo {
 	}
 	
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		String string = "IdListo=" + getIdListo();
 		if (!getListaProcesos().isEmpty()) {
 			string += ", LstProcesos=[";
@@ -48,6 +47,8 @@ public class Listo {
 		return string;
 	}
 
+//////////////////////////////////////////////////////////// METODOS		
+	
 	public Proceso traerProceso(int idProceso)
 	{
 		Proceso objeto = null;
@@ -84,8 +85,8 @@ public class Listo {
 		
 		List<Proceso> lista = new ArrayList<Proceso>();
 		int i = 0;
-		int contAlta = 0;
-		int contMedia = 0;
+		int contadorAlta = 0;
+		int contadorMedia = 0;
 		
 		while (i < getListaProcesos().size())
 		{
@@ -97,9 +98,9 @@ public class Listo {
 				} 				
 				else 
 				{
-					lista.add(contAlta, getListaProcesos().get(i));					
+					lista.add(contadorAlta, getListaProcesos().get(i));					
 				}
-					contAlta++;
+					contadorAlta++;
 			}
 			
 			if (getListaProcesos().get(i).getPrioridad().equals(Prioridad.Media))
@@ -110,9 +111,9 @@ public class Listo {
 				}				
 				else
 				{
-					lista.add(contAlta + contMedia, getListaProcesos().get(i));
+					lista.add(contadorAlta + contadorMedia, getListaProcesos().get(i));
 				}
-					contMedia++;
+					contadorMedia++;
 			}
 			if (getListaProcesos().get(i).getPrioridad().equals(Prioridad.Baja))
 			{
@@ -128,8 +129,8 @@ public class Listo {
 		return bandera;
 	}
 	
-	public boolean ordenarTiempoTotal() {
-
+	public boolean ordenarTiempoTotal()
+	{
 		Collections.sort(getListaProcesos());
 		return true;
 	}
@@ -138,16 +139,16 @@ public class Listo {
 	{
 		Proceso objeto = new Proceso();
 		
-		int j = 0;
+		int i = 0;
 		int inicioCPU = 0;
 		int finCPU = 0;
 		
-		while (j < getListaProcesos().size()) 
+		while (i < getListaProcesos().size()) 
 		{
 			inicioCPU = 0;
 			finCPU = 0;
 			
-			objeto = getListaProcesos().get(j);
+			objeto = getListaProcesos().get(i);
 			
 			if (objeto.getDuracion().getInicioCPU() > 0)
 			{
@@ -160,7 +161,7 @@ public class Listo {
 			}
 			
 			objeto.getDuracion().setTiempoTotal(inicioCPU + finCPU);
-			j++;
+			i++;
 		}		
 
 		Collections.sort(getListaProcesos());
@@ -170,9 +171,13 @@ public class Listo {
 	public boolean tasaRespuesta()
 	{
 		int prioridad = 0;
+		boolean bandera = false;
 		
 		if (!getListaProcesos().isEmpty())
 		{
+			
+			bandera = true;
+			
 			for (Proceso proceso : getListaProcesos())
 			{
 				proceso.tiempoEspera();
@@ -193,11 +198,9 @@ public class Listo {
 				{
 					proceso.setPrioridad(Prioridad.Alta);
 				}
-			}
-			
-			return true;
+			}				
 		}
-			return false;
-	}	
+			return bandera;
+	}
 	
 }

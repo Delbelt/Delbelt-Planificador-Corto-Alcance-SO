@@ -43,8 +43,10 @@ public class Hilo {
 		return "Hilo [idHilo=" + idHilo + ", ejecutando=" + ejecutando + ", proceso=" + proceso + "]";
 	}
 	
-	public boolean ejecutarProceso(Proceso proceso) {
-		
+//////////////////////////////////////////////////////////// METODOS	
+	
+	public boolean ejecutarProceso(Proceso proceso)
+	{		
 		boolean validacion = getEjecutando();
 		
 		if (! getEjecutando()) 
@@ -56,8 +58,8 @@ public class Hilo {
 		return (validacion != getEjecutando());
 	}
 	
-	public boolean ejecutarInstrucción() {
-		
+	public boolean ejecutarInstrucción()
+	{		
 		boolean ejecutado = false;
 		
 		int tiempo = getProceso().getDuracion().getInicioCPU();
@@ -66,8 +68,7 @@ public class Hilo {
 		{			
 			getProceso().getDuracion().setInicioCPU(tiempo - 1);
 			ejecutado = true;
-		}
-		
+		}		
 		else 		
 		{
 			tiempo = getProceso().getDuracion().getFinCPU();
@@ -82,8 +83,8 @@ public class Hilo {
 		return ejecutado;
 	}
 	
-	public Proceso eliminarProceso(){
-		
+	public Proceso eliminarProceso()
+	{		
 		Proceso objeto = null;
 		
 		if (getEjecutando())

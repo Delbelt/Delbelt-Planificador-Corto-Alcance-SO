@@ -52,15 +52,13 @@ public class Tabla {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		return ((Tabla)obj).getEstado().equals(this.getEstado());
 	}
 	
-	public boolean equals(String estado) { //CHEQUEAR CON TablaProcesosABM
-		if (getEstado().equals(estado))
-			return true;
-		return false;
-	}
-	
-	
+	public boolean equals(String estado) {
+		
+		return getEstado().equals(estado);
+	}	
 }

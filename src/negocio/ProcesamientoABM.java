@@ -565,6 +565,7 @@ public class ProcesamientoABM {
 		return end;
 	}
 
+
 ////////////////////////////////////////////////////////////NO APROPIATIVOS	
 	
 	public Tabla[][] planificarFIFO()
@@ -713,9 +714,9 @@ public class ProcesamientoABM {
 		return tabla;
 	}
 	
+
 //////////////////////////////////////////////////////////// APROPIATIVOS
-	
-	
+		
 	public Tabla[][] planificarRoundRobin(int quantum)
 	{
 		// Preparo Datos

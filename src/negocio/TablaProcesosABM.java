@@ -78,14 +78,16 @@ public class TablaProcesosABM {
 		}
 		return string;
 	}
+
+////////////////////////////////////////////////////////////METODOS	
 	
-	public Proceso traerProceso(int idProceso) {
-		
+	public Proceso traerProceso(int idProceso)
+	{		
 		return listaProcesos.get(idProceso - 1);
 	}
 
-	public String mostrarResultados(Tabla[][] tabla) {
-		
+	public String mostrarResultados(Tabla[][] tabla)
+	{		
 		return toString(tabla);
 	}
 	
@@ -99,8 +101,8 @@ public class TablaProcesosABM {
 		return traerProceso(idProceso).tiempoTotal();
 	}
 
-	public int tiempoFinalizacion(int idProceso, Tabla[][] tabla) {
-		
+	public int tiempoFinalizacion(int idProceso, Tabla[][] tabla)
+	{		
 		int tiempo = 0;
 		
 		for (int i = 0; i < getCantidaColumnas(); i++) 
