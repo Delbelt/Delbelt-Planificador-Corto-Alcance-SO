@@ -70,7 +70,7 @@ public class Proceso implements Cloneable, Comparable<Proceso> {
 	@Override
 	public String toString() {
 		return "Proceso [idProceso=" + idProceso + ", proceso=" + proceso + ", comienzaTiempo=" + comienzaTiempo
-				+ ", prioridad=" + prioridad + ", duracion=" + duracion + "]";
+				+ ", prioridad=" + prioridad + ", duracion=" + duracion + "]\n";
 	}
 	
 //////////////////////////////////////////////////////////// METODOS		

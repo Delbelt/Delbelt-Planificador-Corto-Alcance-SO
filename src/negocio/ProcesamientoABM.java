@@ -697,6 +697,7 @@ public class ProcesamientoABM {
 				listarProcesoBloqueado();
 				// Se Ordena: Si
 				getListo().ordenarTiempoTotal(); /***Ordeno por Tiempo Total***/
+				//getListo().ordenarTiempoTotalPrioridad();
 				// Se saca un proceso de Listo a: Ejecutando
 				procesarProceso();
 				// Se Revisa CPU y Ejecuto Proceso
@@ -795,7 +796,7 @@ public class ProcesamientoABM {
 				// Se pasa proceso Bloqueado a: Listo
 				listarProcesoBloqueado();
 				// Se Ordena: Si
-				getListo().ordenarPrioridad(); /***Ordeno por Prioridad***/
+				getListo().ordenarPrioridad(); /***Ordeno por Prioridad***/				
 				// Se saca un proceso de Listo a: Ejecutando
 				procesarProceso();
 				// Se Revisa CPU y Ejecuto Proceso
@@ -864,6 +865,55 @@ public class ProcesamientoABM {
 			}// Fin del tiempo de la tabla 
 		}
 		
+		return tabla;
+	}
+	
+	public Tabla[][] planificarIndominus()
+	{
+		// Preparo Datos
+		List<Proceso> lista = clone(getListaProcesos());
+		Tabla[][] tabla = newTable();
+		// Preparo el hilo 
+		getHilo().setEjecutando(false);
+		// Contadores
+		int contador = lista.size();
+		int timeOut = 1;
+		// Si existen Procesos cargado entonces resuelvo algoritmo 
+		if (!lista.isEmpty())
+		{
+			// Por toda la tabla agrego los estados 
+			for (int columna = 0; columna < getCantidaColumnas(); columna++)
+			{
+				// Se Realiza Turnos Rotativos: Si
+				if(timeOut==0)if(turnarProcesoLIFO())timeOut=1;
+				// Se pasa proceso a: Listo
+				if (contador >= 0)
+				{
+					if (listarProcesoEntrada(lista,columna))
+					{
+						contador--;// Se promueve Proceso: No						
+					}
+				}
+				// Se pasa proceso Bloqueado a: Listo
+				listarProcesoBloqueado();
+				// Se Ordena: Si
+				getListo().ordenarTiempoTotalPrioridad();
+				// Se saca un proceso de Listo a: Ejecutando
+				procesarProceso();
+				// Se Revisa CPU y Ejecuto Proceso
+				if (activador(tabla,columna))
+				{
+					procesarProceso(); // Caso de que se bloquea o termina Proceso anterior. Se saca un proceso de Listo a: Ejecutando
+					activador(tabla,columna);
+					// Se reinicia quantum: Si
+					timeOut=1;
+				}
+				// Se resta Quantum: Si
+				timeOut--;
+				// Se realiza E/S: Paralelo
+				ejecutarEyS(tabla,columna);
+			}// Fin del tiempo de la tabla 
+		}
 		return tabla;
 	}
 	

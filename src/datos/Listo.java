@@ -203,4 +203,41 @@ public class Listo {
 			return bandera;
 	}
 	
+	public boolean ordenarTiempoTotalPrioridad()
+	{	
+		List<Proceso> listaAlta = new ArrayList<Proceso>();
+		List<Proceso> listaMedia = new ArrayList<Proceso>();
+		List<Proceso> listaBaja = new ArrayList<Proceso>();
+		
+		for (Proceso lista : listaProcesos)
+		{	
+			if(lista.getPrioridad().equals(Prioridad.Alta))
+			{
+				listaAlta.add(lista);
+			}
+			
+			if(lista.getPrioridad().equals(Prioridad.Media))
+			{
+				listaMedia.add(lista);
+			}
+			
+			if(lista.getPrioridad().equals(Prioridad.Baja))
+			{
+				listaBaja.add(lista);
+			}			
+		}
+		
+		Collections.sort(listaAlta);
+		Collections.sort(listaMedia);
+		Collections.sort(listaBaja);
+		
+		listaProcesos.removeAll(listaProcesos);
+		
+		listaProcesos.addAll(listaAlta);
+		listaProcesos.addAll(listaMedia);
+		listaProcesos.addAll(listaBaja);
+		
+		return true;
+	}
+	
 }
